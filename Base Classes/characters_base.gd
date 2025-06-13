@@ -28,6 +28,13 @@ func _ready() -> void:
 	stateMachine.character = self
 	stateMachine.change_state(idleStateName)
 
+	collision_mask = 1
+
+	if isPlayer:
+		collision_layer = 2
+	else:
+		collision_layer = 3
+
 func _physics_process(delta: float) -> void:
 	stateMachine._physics_process(delta)
 

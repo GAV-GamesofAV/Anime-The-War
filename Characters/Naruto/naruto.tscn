@@ -307,21 +307,23 @@ script = ExtResource("9_ffrrd")
 animationName = "run"
 metadata/_custom_type_script = "uid://0vi8a5227h78"
 
-[node name="LightAttack1State" type="Node" parent="StateMachine"]
+[node name="LightAttack" type="Node" parent="StateMachine"]
+
+[node name="LightAttack1State" type="Node" parent="StateMachine/LightAttack"]
 script = ExtResource("11_ewq0f")
 animationName = "right_punch"
 
-[node name="LightAttack2State" type="Node" parent="StateMachine"]
+[node name="LightAttack2State" type="Node" parent="StateMachine/LightAttack"]
 script = ExtResource("12_tywue")
 animationName = "left_punch"
 metadata/_custom_type_script = "uid://ddxdi8rv562yh"
 
-[node name="LightAttack3State" type="Node" parent="StateMachine"]
+[node name="LightAttack3State" type="Node" parent="StateMachine/LightAttack"]
 script = ExtResource("13_twwd3")
 animationName = "head_but"
 metadata/_custom_type_script = "uid://dxblmdji46g4w"
 
-[node name="LightAttack4State" type="Node" parent="StateMachine"]
+[node name="LightAttack4State" type="Node" parent="StateMachine/LightAttack"]
 script = ExtResource("14_uigk4")
 animationName = "right_punch_2"
 metadata/_custom_type_script = "uid://bpvm21epidu7t"

@@ -10,7 +10,6 @@ var character: Character
 
 func enter(_character): 
     character = _character
-    print("Entered " + str(self.name))
 
 func update(_delta):
     pass

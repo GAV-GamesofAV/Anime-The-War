@@ -9,6 +9,10 @@ func _ready() -> void:
 	for child in get_children():
 		if child is State:
 			states[child.name] = child
+		elif child.name == "LightAttack":
+			for c in child.get_children():
+				if c is State:
+					states[c.name] = c
 		
 func change_state(newStateName: String):
 	if currentState:

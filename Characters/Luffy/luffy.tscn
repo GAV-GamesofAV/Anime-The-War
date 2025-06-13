@@ -1,0 +1,113 @@
+[gd_scene load_steps=17 format=3 uid="uid://thgpiubtb6jr"]
+
+[ext_resource type="Script" uid="uid://co1o2a63mu1kj" path="res://Base Classes/characters_base.gd" id="1_ijj7t"]
+[ext_resource type="Texture2D" uid="uid://2c5kwj4rprcd" path="res://Assets/characters/Luffy/Luffy Idle.png" id="2_hrijp"]
+[ext_resource type="Texture2D" uid="uid://dramhpko68y4x" path="res://Assets/characters/Luffy/Luffy running.png" id="3_y8sh0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jqbla"]
+atlas = ExtResource("2_hrijp")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swalr"]
+atlas = ExtResource("2_hrijp")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12g3y"]
+atlas = ExtResource("2_hrijp")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvi5u"]
+atlas = ExtResource("3_y8sh0")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o58gf"]
+atlas = ExtResource("3_y8sh0")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5t21"]
+atlas = ExtResource("3_y8sh0")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltpi0"]
+atlas = ExtResource("3_y8sh0")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyl8q"]
+atlas = ExtResource("3_y8sh0")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1514"]
+atlas = ExtResource("3_y8sh0")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4x3kj"]
+atlas = ExtResource("3_y8sh0")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e2hre"]
+atlas = ExtResource("3_y8sh0")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ncima"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jqbla")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_swalr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12g3y")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvi5u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o58gf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5t21")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ltpi0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyl8q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1514")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4x3kj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e2hre")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ijj7t"]
+radius = 18.0
+height = 66.0
+
+[node name="Luffy" type="CharacterBody2D"]
+script = ExtResource("1_ijj7t")
+metadata/_custom_type_script = "uid://co1o2a63mu1kj"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ncima")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.173934
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 3)
+shape = SubResource("CapsuleShape2D_ijj7t")
