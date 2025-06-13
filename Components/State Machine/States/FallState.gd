@@ -8,5 +8,5 @@ func enter(_character):
 func update(_delta):
     super(_delta)
     if character.is_on_floor() or character.velocity.y == 0:
-        character.velocity.y = 0
+        character.velocity = Vector2.ZERO
         character.change_state(character.idleStateName)

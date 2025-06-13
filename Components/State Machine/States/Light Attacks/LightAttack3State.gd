@@ -4,7 +4,6 @@ class_name LightAttack3State
 func enter(_character):
     super(_character)
 
-    attackState = true
 
     character.play_animation(animationName)
     character.comboManager.continue_combo("light")

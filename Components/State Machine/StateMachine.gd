@@ -22,11 +22,13 @@ func change_state(newStateName: String):
 		currentState.enter(character)
 		currentState.state_changed.emit(newStateName)
 
-		if currentState.attackState:
+		if currentState is MeleeAttackState:
 			Global.gravity = 0
 			character.velocity = Vector2.ZERO
+			character.hitbox.monitoring = true
 		else:
 			Global.set_gravity()
+			character.hitbox.monitoring = false
 
 
 

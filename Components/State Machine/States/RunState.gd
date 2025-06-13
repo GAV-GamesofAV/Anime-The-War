@@ -14,12 +14,12 @@ func update(_delta):
         character.move(direction)
 
     #Character flipping
-    if direction == 0:
-        character.sprite.flip_h = character.sprite.flip_h
-    elif direction > 0:
+    if direction > 0:
         character.sprite.flip_h = false
+        character.hitbox.position.x = character.hitbox.xOffset
     elif direction < 0:
         character.sprite.flip_h = true
+        character.hitbox.position.x = -character.hitbox.xOffset
 
     #Change States
     if direction == 0:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://b6rhp0n3qdyxd"]
+[gd_scene load_steps=50 format=3 uid="uid://b6rhp0n3qdyxd"]
 
 [ext_resource type="Script" uid="uid://by08rs6u7kjb2" path="res://Characters/Naruto/naruto.gd" id="1_ewq0f"]
 [ext_resource type="Texture2D" uid="uid://chixinphc8i1" path="res://Assets/characters/Naruto/Naruto-Idle.png" id="2_grh85"]
@@ -10,12 +10,12 @@
 [ext_resource type="Script" uid="uid://7gm7kso6ovuy" path="res://Components/State Machine/States/FallState.gd" id="7_ewq0f"]
 [ext_resource type="Script" uid="uid://t3riyad2iq5e" path="res://Components/State Machine/States/JumpState.gd" id="8_xrkik"]
 [ext_resource type="Script" uid="uid://0vi8a5227h78" path="res://Components/State Machine/States/RunState.gd" id="9_ffrrd"]
-[ext_resource type="Script" uid="uid://dom308uweplfn" path="res://Components/State Machine/States/Light Attacks/LightAttack1State.gd" id="11_ewq0f"]
+[ext_resource type="Script" uid="uid://dnuqscb2k1arl" path="res://Components/State Machine/States/State Bases/MeleeAttackStateBase.gd" id="11_5snf0"]
 [ext_resource type="Script" uid="uid://4860wyu75yor" path="res://Components/ComboManager/ComboManager.gd" id="11_ffrrd"]
 [ext_resource type="Script" uid="uid://ikgmcjlel12x" path="res://Components/ComboManager/ComboSettings.gd" id="12_5snf0"]
-[ext_resource type="Script" uid="uid://ddxdi8rv562yh" path="res://Components/State Machine/States/Light Attacks/LightAttack2State.gd" id="12_tywue"]
-[ext_resource type="Script" uid="uid://dxblmdji46g4w" path="res://Components/State Machine/States/Light Attacks/LightAttack3State.gd" id="13_twwd3"]
-[ext_resource type="Script" uid="uid://bpvm21epidu7t" path="res://Components/State Machine/States/Light Attacks/LightAttack4State.gd" id="14_uigk4"]
+[ext_resource type="Script" uid="uid://dxolowo8wnp07" path="res://Components/HealthComponent.gd" id="14_twwd3"]
+[ext_resource type="Script" uid="uid://dul0n5x83yrhk" path="res://Components/HurtBox.gd" id="15_uigk4"]
+[ext_resource type="Script" uid="uid://6vrp6qpwpndh" path="res://Components/HitBox.gd" id="16_deaoy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_grh85"]
 atlas = ExtResource("3_grh85")
@@ -267,16 +267,25 @@ maxStages = 4
 timeout = 1.0
 metadata/_custom_type_script = "uid://ikgmcjlel12x"
 
-[node name="Naruto" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "stateMachine", "comboManager")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nu668"]
+size = Vector2(23, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_twwd3"]
+size = Vector2(28, 50)
+
+[node name="Naruto" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "stateMachine", "comboManager", "healthComponent", "hurtbox", "hitbox")]
 script = ExtResource("1_ewq0f")
 sprite = NodePath("AnimatedSprite2D")
 stateMachine = NodePath("StateMachine")
 comboManager = NodePath("ComboManager")
+healthComponent = NodePath("HealthComponent")
+hurtbox = NodePath("HurtBox")
+hitbox = NodePath("HitBox")
 metadata/_custom_type_script = "uid://co1o2a63mu1kj"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1wp1r")
-animation = &"head_but"
+animation = &"right_punch"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -310,25 +319,60 @@ metadata/_custom_type_script = "uid://0vi8a5227h78"
 [node name="LightAttack" type="Node" parent="StateMachine"]
 
 [node name="LightAttack1State" type="Node" parent="StateMachine/LightAttack"]
-script = ExtResource("11_ewq0f")
+script = ExtResource("11_5snf0")
+comboName = "light"
+actionName = &"attack 1"
 animationName = "right_punch"
+metadata/_custom_type_script = "uid://dnuqscb2k1arl"
 
 [node name="LightAttack2State" type="Node" parent="StateMachine/LightAttack"]
-script = ExtResource("12_tywue")
+script = ExtResource("11_5snf0")
+comboName = "light"
+actionName = &"attack 1"
 animationName = "left_punch"
-metadata/_custom_type_script = "uid://ddxdi8rv562yh"
+metadata/_custom_type_script = "uid://dnuqscb2k1arl"
 
 [node name="LightAttack3State" type="Node" parent="StateMachine/LightAttack"]
-script = ExtResource("13_twwd3")
+script = ExtResource("11_5snf0")
+comboName = "light"
+actionName = &"attack 1"
 animationName = "head_but"
-metadata/_custom_type_script = "uid://dxblmdji46g4w"
+metadata/_custom_type_script = "uid://dnuqscb2k1arl"
 
 [node name="LightAttack4State" type="Node" parent="StateMachine/LightAttack"]
-script = ExtResource("14_uigk4")
+script = ExtResource("11_5snf0")
+comboName = "light"
+actionName = &"attack 1"
 animationName = "right_punch_2"
-metadata/_custom_type_script = "uid://bpvm21epidu7t"
+metadata/_custom_type_script = "uid://dnuqscb2k1arl"
 
 [node name="ComboManager" type="Node" parent="."]
 script = ExtResource("11_ffrrd")
 comboSettings = Array[ExtResource("12_5snf0")]([SubResource("Resource_tywue")])
 metadata/_custom_type_script = "uid://4860wyu75yor"
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("14_twwd3")
+metadata/_custom_type_script = "uid://dxolowo8wnp07"
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("healthComponent")]
+script = ExtResource("15_uigk4")
+healthComponent = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://dul0n5x83yrhk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(1, -4)
+shape = SubResource("RectangleShape2D_nu668")
+debug_color = Color(0.980806, 0, 0.376526, 0.42)
+
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2(10, 0)
+script = ExtResource("16_deaoy")
+damage = 5
+xOffset = 10.0
+metadata/_custom_type_script = "uid://6vrp6qpwpndh"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-2, -5)
+shape = SubResource("RectangleShape2D_twwd3")
+debug_color = Color(1.44392e-06, 0.639391, 0.365327, 0.42)

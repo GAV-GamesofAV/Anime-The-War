@@ -6,10 +6,13 @@ class_name Character
 @export var jumpVelocity: int = 400
 
 @export var sprite: AnimatedSprite2D
-
 @export var stateMachine: StateMachine
-
 @export var comboManager: ComboManager
+@export var healthComponent: HealthComponent
+@export var hurtbox: HurtBox
+@export var hitbox: HitBox
+
+var enemy: Character
 
 #Name of states
 var idleStateName: String = "IdleState"
@@ -35,6 +38,9 @@ func _ready() -> void:
 	else:
 		collision_layer = 3
 
+	enemy = get_tree().get_first_node_in_group("Enemy")
+	hitbox.set_deferred("enemy", enemy)
+
 func _physics_process(delta: float) -> void:
 	stateMachine._physics_process(delta)
 
@@ -46,7 +52,8 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	stateMachine._process(delta)
-	comboManager.update(delta)
+	if comboManager:
+		comboManager.update(delta)
 
 func change_state(newStateName: String):
 	stateMachine.change_state(newStateName)

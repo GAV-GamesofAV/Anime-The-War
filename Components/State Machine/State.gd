@@ -5,7 +5,7 @@ signal state_changed(new_state_name: String)
 
 @export var animationName: String
 
-var attackState: bool = false
+
 var character: Character
 
 func enter(_character): 

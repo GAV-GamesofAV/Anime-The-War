@@ -26,9 +26,8 @@ func start_combo(comboType: String):
 
 func continue_combo(comboType: String):
     var data = comboData[comboType]
-    if data["stage"] < data["maxStage"]:
-        data["stage"] += 1
-    else:
+    data["stage"] += 1
+    if data["stage"] >= data["maxStage"]:
         reset_combo(comboType)
     
     data["canChain"] = false
@@ -70,3 +69,6 @@ func get_stage(comboType: String) -> int:
 
 func time_left(comboType: String) -> float:
     return comboData[comboType]["timeout"] - comboData[comboType]["timer"]
+
+func max_stage_reached(comboType) -> bool:
+    return get_stage(comboType) >= comboData[comboType]["maxStage"]

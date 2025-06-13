@@ -6,7 +6,7 @@ func enter(_character):
 	character.play_animation(animationName)
 	character.comboManager.start_combo("light")
 	
-	attackState = true
+
 
 func update(_delta):
 	
