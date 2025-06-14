@@ -1,10 +1,11 @@
-[gd_scene load_steps=50 format=3 uid="uid://b6rhp0n3qdyxd"]
+[gd_scene load_steps=54 format=3 uid="uid://b6rhp0n3qdyxd"]
 
 [ext_resource type="Script" uid="uid://by08rs6u7kjb2" path="res://Characters/Naruto/naruto.gd" id="1_ewq0f"]
 [ext_resource type="Texture2D" uid="uid://chixinphc8i1" path="res://Assets/characters/Naruto/Naruto-Idle.png" id="2_grh85"]
 [ext_resource type="Texture2D" uid="uid://bv7kkodfmqe3t" path="res://Assets/characters/Naruto/Naruto-Attack-Combo-1.png" id="2_q8rnu"]
 [ext_resource type="Texture2D" uid="uid://c2u1m7gtwkpl1" path="res://Assets/characters/Naruto/Naruto-Jump.png" id="3_grh85"]
 [ext_resource type="Texture2D" uid="uid://cjvhm0g035d8a" path="res://Assets/characters/Naruto/Naruto-Walking.png" id="3_u1ugt"]
+[ext_resource type="Texture2D" uid="uid://c5gkuhavmfv0p" path="res://Assets/characters/Naruto.png" id="4_uigk4"]
 [ext_resource type="Script" uid="uid://dq0do27vtv6ik" path="res://Components/State Machine/StateMachine.gd" id="5_roric"]
 [ext_resource type="Script" uid="uid://bo11uo47h4dil" path="res://Components/State Machine/States/IdleState.gd" id="6_q8rnu"]
 [ext_resource type="Script" uid="uid://7gm7kso6ovuy" path="res://Components/State Machine/States/FallState.gd" id="7_ewq0f"]
@@ -13,6 +14,7 @@
 [ext_resource type="Script" uid="uid://dnuqscb2k1arl" path="res://Components/State Machine/States/MeleeAttackStateBase.gd" id="11_5snf0"]
 [ext_resource type="Script" uid="uid://4860wyu75yor" path="res://Components/ComboManager/ComboManager.gd" id="11_ffrrd"]
 [ext_resource type="Script" uid="uid://ikgmcjlel12x" path="res://Components/ComboManager/ComboSettings.gd" id="12_5snf0"]
+[ext_resource type="Script" uid="uid://ckni4s85e7nul" path="res://Components/State Machine/States/HurtState.gd" id="12_deaoy"]
 [ext_resource type="Script" uid="uid://dxolowo8wnp07" path="res://Components/HealthComponent.gd" id="14_twwd3"]
 [ext_resource type="Script" uid="uid://dul0n5x83yrhk" path="res://Components/HurtBox.gd" id="15_uigk4"]
 [ext_resource type="Script" uid="uid://6vrp6qpwpndh" path="res://Components/HitBox.gd" id="16_deaoy"]
@@ -40,6 +42,14 @@ region = Rect2(0, 128, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_tywue"]
 atlas = ExtResource("2_q8rnu")
 region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x633c"]
+atlas = ExtResource("4_uigk4")
+region = Rect2(596, 504, 65, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nx046"]
+atlas = ExtResource("4_uigk4")
+region = Rect2(531, 504, 65, 84)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cvm7i"]
 atlas = ExtResource("2_grh85")
@@ -158,6 +168,22 @@ animations = [{
 "loop": false,
 "name": &"head_but",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x633c")
+}],
+"loop": true,
+"name": &"hurt1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nx046")
+}],
+"loop": true,
+"name": &"hurt2",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -285,7 +311,7 @@ metadata/_custom_type_script = "uid://co1o2a63mu1kj"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1wp1r")
-animation = &"right_punch"
+animation = &"hurt1"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -315,6 +341,11 @@ metadata/_custom_type_script = "uid://t3riyad2iq5e"
 script = ExtResource("9_ffrrd")
 animationName = Array[String](["run"])
 metadata/_custom_type_script = "uid://0vi8a5227h78"
+
+[node name="HurtState" type="Node" parent="StateMachine"]
+script = ExtResource("12_deaoy")
+animationName = Array[String](["hurt_1", "hurt_2"])
+metadata/_custom_type_script = "uid://ckni4s85e7nul"
 
 [node name="LightAttack" type="Node" parent="StateMachine"]
 

@@ -21,7 +21,7 @@ var jumpStateName: String = "JumpState"
 var fallStateName: String = "FallState"
 var hurtStateName: String = "HurtState"
 #Attacks
-var lightAttackComboStatesNames: Array[String] = [
+@export var lightAttackComboStatesNames: Array[String] = [
 	"LightAttack1State",
 	"LightAttack2State",
 	"LightAttack3State",
