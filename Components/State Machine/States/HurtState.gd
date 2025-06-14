@@ -1,12 +1,10 @@
 extends State
-class_name FallState
+class_name HurtState
 
 func enter(_character):
     super(_character)
     character.play_animation(animationName[randi() % animationName.size()])
     
 func update(_delta):
-    super(_delta)
-    if character.is_on_floor() or character.velocity.y == 0:
-        character.velocity = Vector2.ZERO
+    if not character.enemy.stateMachine.currentState is MeleeAttackState:
         character.change_state(character.idleStateName)

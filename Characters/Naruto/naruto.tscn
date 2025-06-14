@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://7gm7kso6ovuy" path="res://Components/State Machine/States/FallState.gd" id="7_ewq0f"]
 [ext_resource type="Script" uid="uid://t3riyad2iq5e" path="res://Components/State Machine/States/JumpState.gd" id="8_xrkik"]
 [ext_resource type="Script" uid="uid://0vi8a5227h78" path="res://Components/State Machine/States/RunState.gd" id="9_ffrrd"]
-[ext_resource type="Script" uid="uid://dnuqscb2k1arl" path="res://Components/State Machine/States/State Bases/MeleeAttackStateBase.gd" id="11_5snf0"]
+[ext_resource type="Script" uid="uid://dnuqscb2k1arl" path="res://Components/State Machine/States/MeleeAttackStateBase.gd" id="11_5snf0"]
 [ext_resource type="Script" uid="uid://4860wyu75yor" path="res://Components/ComboManager/ComboManager.gd" id="11_ffrrd"]
 [ext_resource type="Script" uid="uid://ikgmcjlel12x" path="res://Components/ComboManager/ComboSettings.gd" id="12_5snf0"]
 [ext_resource type="Script" uid="uid://dxolowo8wnp07" path="res://Components/HealthComponent.gd" id="14_twwd3"]
@@ -298,22 +298,22 @@ metadata/_custom_type_script = "uid://dq0do27vtv6ik"
 
 [node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource("6_q8rnu")
-animationName = "idle"
+animationName = Array[String](["idle"])
 metadata/_custom_type_script = "uid://bo11uo47h4dil"
 
 [node name="FallState" type="Node" parent="StateMachine"]
 script = ExtResource("7_ewq0f")
-animationName = "fall"
+animationName = Array[String](["fall"])
 metadata/_custom_type_script = "uid://7gm7kso6ovuy"
 
 [node name="JumpState" type="Node" parent="StateMachine"]
 script = ExtResource("8_xrkik")
-animationName = "jump"
+animationName = Array[String](["jump"])
 metadata/_custom_type_script = "uid://t3riyad2iq5e"
 
 [node name="RunState" type="Node" parent="StateMachine"]
 script = ExtResource("9_ffrrd")
-animationName = "run"
+animationName = Array[String](["run"])
 metadata/_custom_type_script = "uid://0vi8a5227h78"
 
 [node name="LightAttack" type="Node" parent="StateMachine"]
@@ -322,28 +322,28 @@ metadata/_custom_type_script = "uid://0vi8a5227h78"
 script = ExtResource("11_5snf0")
 comboName = "light"
 actionName = &"attack 1"
-animationName = "right_punch"
+animationName = Array[String](["right_punch"])
 metadata/_custom_type_script = "uid://dnuqscb2k1arl"
 
 [node name="LightAttack2State" type="Node" parent="StateMachine/LightAttack"]
 script = ExtResource("11_5snf0")
 comboName = "light"
 actionName = &"attack 1"
-animationName = "left_punch"
+animationName = Array[String](["left_punch"])
 metadata/_custom_type_script = "uid://dnuqscb2k1arl"
 
 [node name="LightAttack3State" type="Node" parent="StateMachine/LightAttack"]
 script = ExtResource("11_5snf0")
 comboName = "light"
 actionName = &"attack 1"
-animationName = "head_but"
+animationName = Array[String](["head_but"])
 metadata/_custom_type_script = "uid://dnuqscb2k1arl"
 
 [node name="LightAttack4State" type="Node" parent="StateMachine/LightAttack"]
 script = ExtResource("11_5snf0")
 comboName = "light"
 actionName = &"attack 1"
-animationName = "right_punch_2"
+animationName = Array[String](["right_punch_2"])
 metadata/_custom_type_script = "uid://dnuqscb2k1arl"
 
 [node name="ComboManager" type="Node" parent="."]

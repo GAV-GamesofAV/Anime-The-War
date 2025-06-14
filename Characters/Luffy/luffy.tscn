@@ -1,13 +1,23 @@
-[gd_scene load_steps=24 format=3 uid="uid://thgpiubtb6jr"]
+[gd_scene load_steps=28 format=3 uid="uid://thgpiubtb6jr"]
 
 [ext_resource type="Script" uid="uid://co1o2a63mu1kj" path="res://Base Classes/characters_base.gd" id="1_ijj7t"]
 [ext_resource type="Texture2D" uid="uid://2c5kwj4rprcd" path="res://Assets/characters/Luffy/Luffy Idle.png" id="2_hrijp"]
+[ext_resource type="Texture2D" uid="uid://cnllx3gkqh0my" path="res://Assets/characters/Luffy/Luffy Hurt.png" id="2_mvi5u"]
 [ext_resource type="Texture2D" uid="uid://dramhpko68y4x" path="res://Assets/characters/Luffy/Luffy running.png" id="3_y8sh0"]
 [ext_resource type="Script" uid="uid://dq0do27vtv6ik" path="res://Components/State Machine/StateMachine.gd" id="4_12g3y"]
 [ext_resource type="Script" uid="uid://bo11uo47h4dil" path="res://Components/State Machine/States/IdleState.gd" id="5_mvi5u"]
 [ext_resource type="Script" uid="uid://dxolowo8wnp07" path="res://Components/HealthComponent.gd" id="6_jqbla"]
+[ext_resource type="Script" uid="uid://ckni4s85e7nul" path="res://Components/State Machine/States/HurtState.gd" id="7_o58gf"]
 [ext_resource type="Script" uid="uid://dul0n5x83yrhk" path="res://Components/HurtBox.gd" id="7_swalr"]
 [ext_resource type="Script" uid="uid://6vrp6qpwpndh" path="res://Components/HitBox.gd" id="8_12g3y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncima"]
+atlas = ExtResource("2_mvi5u")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbnp8"]
+atlas = ExtResource("2_mvi5u")
+region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jqbla"]
 atlas = ExtResource("2_hrijp")
@@ -55,6 +65,22 @@ region = Rect2(128, 256, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ncima"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncima")
+}],
+"loop": true,
+"name": &"hurt1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbnp8")
+}],
+"loop": true,
+"name": &"hurt2",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jqbla")
@@ -119,9 +145,8 @@ metadata/_custom_type_script = "uid://co1o2a63mu1kj"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ncima")
-animation = &"idle"
+animation = &"hurt1"
 autoplay = "idle"
-frame_progress = 0.173934
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 3)
@@ -133,7 +158,13 @@ metadata/_custom_type_script = "uid://dq0do27vtv6ik"
 
 [node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource("5_mvi5u")
+animationName = Array[String](["idle"])
 metadata/_custom_type_script = "uid://bo11uo47h4dil"
+
+[node name="HurtState" type="Node" parent="StateMachine"]
+script = ExtResource("7_o58gf")
+animationName = Array[String](["hurt1", "hurt2"])
+metadata/_custom_type_script = "uid://ckni4s85e7nul"
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("6_jqbla")

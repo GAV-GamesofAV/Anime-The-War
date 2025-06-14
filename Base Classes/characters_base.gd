@@ -19,6 +19,7 @@ var idleStateName: String = "IdleState"
 var runStateName: String = "RunState"
 var jumpStateName: String = "JumpState"
 var fallStateName: String = "FallState"
+var hurtStateName: String = "HurtState"
 #Attacks
 var lightAttackComboStatesNames: Array[String] = [
 	"LightAttack1State",
@@ -38,8 +39,12 @@ func _ready() -> void:
 	else:
 		collision_layer = 3
 
-	enemy = get_tree().get_first_node_in_group("Enemy")
-	hitbox.set_deferred("enemy", enemy)
+	if isPlayer:
+		enemy = get_tree().get_first_node_in_group("Enemy")
+		hitbox.enemy = enemy
+	else:
+		enemy = get_tree().get_first_node_in_group("Player")
+		hitbox.enemy = enemy
 
 func _physics_process(delta: float) -> void:
 	stateMachine._physics_process(delta)

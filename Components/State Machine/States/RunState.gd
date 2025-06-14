@@ -5,7 +5,7 @@ var direction = 0
 
 func enter(_character):
     super(_character)
-    character.play_animation(animationName)
+    character.play_animation(animationName[randi() % animationName.size()])
 
 func update(_delta):
     
@@ -26,7 +26,7 @@ func update(_delta):
         character.change_state(character.idleStateName)
     if Input.is_action_pressed("jump"):
         character.change_state(character.jumpStateName)
-    elif Input.is_action_just_pressed("attack 1"):
+    elif character.isPlayer and Input.is_action_just_pressed("attack 1"):
         if character.comboManager.is_chaining_allowed("light"):
             character.change_state(character.lightAttackComboStatesNames[character.comboManager.get_stage("light")])
         else:

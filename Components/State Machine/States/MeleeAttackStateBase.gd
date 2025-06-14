@@ -7,7 +7,7 @@ class_name MeleeAttackState
 
 func enter(_character):
 	super(_character)
-	character.play_animation(animationName)
+	character.play_animation(animationName[randi() % animationName.size()])
 
 	if character.comboManager.get_stage(comboName) == 0:
 		character.comboManager.start_combo(comboName)

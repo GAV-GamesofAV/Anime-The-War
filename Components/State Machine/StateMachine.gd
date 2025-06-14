@@ -22,10 +22,12 @@ func change_state(newStateName: String):
 		currentState.enter(character)
 		currentState.state_changed.emit(newStateName)
 
+		#Add AttackState as or here also
 		if currentState is MeleeAttackState:
 			Global.gravity = 0
 			character.velocity = Vector2.ZERO
 			character.hitbox.monitoring = true
+			character.enemy.change_state(character.enemy.hurtStateName) #Change enemy state to hurt
 		else:
 			Global.set_gravity()
 			character.hitbox.monitoring = false
