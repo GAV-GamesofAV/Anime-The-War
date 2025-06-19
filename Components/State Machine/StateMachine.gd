@@ -27,7 +27,6 @@ func change_state(newStateName: String):
 			Global.gravity = 0
 			character.velocity = Vector2.ZERO
 			character.hitbox.monitoring = true
-			character.enemy.change_state(character.enemy.hurtStateName) #Change enemy state to hurt
 		else:
 			Global.set_gravity()
 			character.hitbox.monitoring = false

@@ -31,6 +31,8 @@ var hurtStateName: String = "HurtState"
 func _ready() -> void:
 	stateMachine.character = self
 	stateMachine.change_state(idleStateName)
+	
+	hurtbox.took_damage.connect(_on_hurtbox_damage)
 
 	collision_mask = 1
 
@@ -74,3 +76,6 @@ func move(dir):
 
 func jump():
 	velocity.y = -jumpVelocity
+
+func _on_hurtbox_damage():
+	change_state(hurtStateName)
