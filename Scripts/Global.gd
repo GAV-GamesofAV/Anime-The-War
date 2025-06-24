@@ -1,5 +1,9 @@
 extends Node
 
+signal game_ready
+
+var gameReady: bool = false
+
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func set_gravity(g = 980):

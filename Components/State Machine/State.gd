@@ -8,7 +8,7 @@ signal state_changed(new_state_name: String)
 
 var character: Character
 
-func enter(_character): 
+func enter(_character):
     character = _character
 
 func update(_delta):

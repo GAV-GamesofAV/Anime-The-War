@@ -1,6 +1,10 @@
 extends CharacterBody2D
 class_name Character
 
+signal character_base_ready
+
+var characterBaseReady: bool = false
+
 @export var isPlayer: bool
 @export var speed: int = 200
 @export var jumpVelocity: int = 400
@@ -29,6 +33,7 @@ var hurtStateName: String = "HurtState"
 ]
 
 func _ready() -> void:
+	await Global.game_ready
 	stateMachine.character = self
 	stateMachine.change_state(idleStateName)
 	
@@ -47,20 +52,25 @@ func _ready() -> void:
 	else:
 		enemy = get_tree().get_first_node_in_group("Player")
 		hitbox.enemy = enemy
+	
+	characterBaseReady = true
+	character_base_ready.emit()
 
 func _physics_process(delta: float) -> void:
-	stateMachine._physics_process(delta)
+	if characterBaseReady:
+		stateMachine._physics_process(delta)
 
-	#Apply Gravity
-	if not is_on_floor():
-		velocity.y += Global.gravity * delta
+		#Apply Gravity
+		if not is_on_floor():
+			velocity.y += Global.gravity * delta
 
-	move_and_slide()
+		move_and_slide()
 
 func _process(delta: float) -> void:
-	stateMachine._process(delta)
-	if comboManager:
-		comboManager.update(delta)
+	if characterBaseReady:
+		stateMachine._process(delta)
+		if comboManager:
+			comboManager.update(delta)
 
 func change_state(newStateName: String):
 	stateMachine.change_state(newStateName)
