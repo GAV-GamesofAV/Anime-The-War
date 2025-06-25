@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://thgpiubtb6jr"]
+[gd_scene load_steps=63 format=3 uid="uid://thgpiubtb6jr"]
 
 [ext_resource type="Script" uid="uid://cvfuxvkonim2f" path="res://Base Classes/characters_base.gd" id="1_ijj7t"]
 [ext_resource type="Texture2D" uid="uid://ci26gm3jjreom" path="res://Assets/characters/Luffy/Luffy Idle.png" id="2_hrijp"]
@@ -14,6 +14,8 @@
 [ext_resource type="Script" uid="uid://dn0c2kt68xel5" path="res://Components/State Machine/States/JumpState.gd" id="9_kyl8q"]
 [ext_resource type="Script" uid="uid://dbacihi2gmwbj" path="res://Components/State Machine/States/FallState.gd" id="10_w1514"]
 [ext_resource type="Script" uid="uid://bdrc0s32clmrj" path="res://Components/State Machine/States/MeleeAttackStateBase.gd" id="11_w1514"]
+[ext_resource type="Script" uid="uid://e4w6n5svo4bm" path="res://Components/State Machine/States/RunState.gd" id="12_e2hre"]
+[ext_resource type="Script" uid="uid://b453m6g0i1jtp" path="res://Components/ComboManager/ComboManager.gd" id="15_4x3kj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ncima"]
 atlas = ExtResource("2_mvi5u")
@@ -357,18 +359,21 @@ size = Vector2(38, 65)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mvi5u"]
 size = Vector2(40, 66)
 
-[node name="Luffy" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "stateMachine", "hurtbox", "hitbox")]
+[node name="Luffy" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "stateMachine", "comboManager", "healthComponent", "hurtbox", "hitbox")]
 script = ExtResource("1_ijj7t")
 sprite = NodePath("AnimatedSprite2D")
 stateMachine = NodePath("StateMachine")
+comboManager = NodePath("ComboManager")
+healthComponent = NodePath("HealthComponent")
 hurtbox = NodePath("HurtBox")
 hitbox = NodePath("HitBox")
-metadata/_custom_type_script = "uid://co1o2a63mu1kj"
+lightAttackComboStatesNames = Array[String](["LightAttack1State", "LightAttack2State", "LightAttack3State"])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ncima")
 animation = &"jet_palm"
 autoplay = "idle"
+frame_progress = 0.765814
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -377,61 +382,55 @@ shape = SubResource("CapsuleShape2D_ijj7t")
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("4_12g3y")
-metadata/_custom_type_script = "uid://dq0do27vtv6ik"
 
 [node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource("5_mvi5u")
 animationName = Array[String](["idle"])
-metadata/_custom_type_script = "uid://bo11uo47h4dil"
 
 [node name="HurtState" type="Node" parent="StateMachine"]
 script = ExtResource("7_o58gf")
 animationName = Array[String](["hurt1", "hurt2"])
-metadata/_custom_type_script = "uid://ckni4s85e7nul"
 
 [node name="JumpState" type="Node" parent="StateMachine"]
 script = ExtResource("9_kyl8q")
 animationName = Array[String](["jump"])
-metadata/_custom_type_script = "uid://t3riyad2iq5e"
 
 [node name="FallState" type="Node" parent="StateMachine"]
 script = ExtResource("10_w1514")
 animationName = Array[String](["fall"])
-metadata/_custom_type_script = "uid://7gm7kso6ovuy"
 
 [node name="LightAttack" type="Node" parent="StateMachine"]
 
 [node name="LightAttack1State" type="Node" parent="StateMachine/LightAttack"]
 script = ExtResource("11_w1514")
+controllerKey = "lightattack"
 comboName = "light"
-actionName = &"attack 1"
 animationName = Array[String](["left_punch"])
-metadata/_custom_type_script = "uid://dnuqscb2k1arl"
 
 [node name="LightAttack2State" type="Node" parent="StateMachine/LightAttack"]
 script = ExtResource("11_w1514")
+controllerKey = "lightattack"
 comboName = "light"
-actionName = &"attack 1"
 animationName = Array[String](["rifle"])
-metadata/_custom_type_script = "uid://dnuqscb2k1arl"
 
 [node name="LightAttack3State" type="Node" parent="StateMachine/LightAttack"]
 script = ExtResource("11_w1514")
+controllerKey = "lightattack"
 comboName = "light"
-actionName = &"attack 1"
 animationName = Array[String](["jet_palm"])
-metadata/_custom_type_script = "uid://dnuqscb2k1arl"
+
+[node name="RunState" type="Node" parent="StateMachine"]
+script = ExtResource("12_e2hre")
+animationName = Array[String](["run"])
+metadata/_custom_type_script = "uid://e4w6n5svo4bm"
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("6_jqbla")
 health = 10
-metadata/_custom_type_script = "uid://dxolowo8wnp07"
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("healthComponent")]
-visible = false
 script = ExtResource("7_swalr")
 healthComponent = NodePath("../HealthComponent")
-metadata/_custom_type_script = "uid://dul0n5x83yrhk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(1, 2.5)
@@ -439,10 +438,14 @@ shape = SubResource("RectangleShape2D_12g3y")
 debug_color = Color(0.97344, 0, 0.433973, 0.42)
 
 [node name="HitBox" type="Area2D" parent="."]
-visible = false
 script = ExtResource("8_12g3y")
-metadata/_custom_type_script = "uid://6vrp6qpwpndh"
+damage = 5
+xOffset = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(10, 3)
 shape = SubResource("RectangleShape2D_mvi5u")
+
+[node name="ComboManager" type="Node" parent="."]
+script = ExtResource("15_4x3kj")
+metadata/_custom_type_script = "uid://b453m6g0i1jtp"

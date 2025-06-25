@@ -16,6 +16,7 @@ var characterBaseReady: bool = false
 @export var hurtbox: HurtBox
 @export var hitbox: HitBox
 
+var controller: Controller
 var enemy: Character
 
 #Name of states
@@ -49,16 +50,25 @@ func _ready() -> void:
 	if isPlayer:
 		enemy = get_tree().get_first_node_in_group("Enemy")
 		hitbox.enemy = enemy
+		controller = PlayerController.new()
+		
 	else:
 		enemy = get_tree().get_first_node_in_group("Player")
 		hitbox.enemy = enemy
+		controller = AIController.new()
+		controller.player = enemy #Set the player of the controller to real player, i.e enemy of this 
 	
+	controller.character = self
+
 	characterBaseReady = true
 	character_base_ready.emit()
 
 func _physics_process(delta: float) -> void:
 	if characterBaseReady:
 		stateMachine._physics_process(delta)
+
+		var inputData: Dictionary = controller.get_input()
+		stateMachine.currentState.handle_input(inputData)
 
 		#Apply Gravity
 		if not is_on_floor():

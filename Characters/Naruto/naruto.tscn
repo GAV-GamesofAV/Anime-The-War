@@ -307,7 +307,6 @@ comboManager = NodePath("ComboManager")
 healthComponent = NodePath("HealthComponent")
 hurtbox = NodePath("HurtBox")
 hitbox = NodePath("HitBox")
-metadata/_custom_type_script = "uid://co1o2a63mu1kj"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1wp1r")
@@ -320,76 +319,63 @@ shape = SubResource("CapsuleShape2D_y855u")
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("5_roric")
-metadata/_custom_type_script = "uid://dq0do27vtv6ik"
 
 [node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource("6_q8rnu")
 animationName = Array[String](["idle"])
-metadata/_custom_type_script = "uid://bo11uo47h4dil"
 
 [node name="FallState" type="Node" parent="StateMachine"]
 script = ExtResource("7_ewq0f")
 animationName = Array[String](["fall"])
-metadata/_custom_type_script = "uid://7gm7kso6ovuy"
 
 [node name="JumpState" type="Node" parent="StateMachine"]
 script = ExtResource("8_xrkik")
 animationName = Array[String](["jump"])
-metadata/_custom_type_script = "uid://t3riyad2iq5e"
 
 [node name="RunState" type="Node" parent="StateMachine"]
 script = ExtResource("9_ffrrd")
 animationName = Array[String](["run"])
-metadata/_custom_type_script = "uid://0vi8a5227h78"
 
 [node name="HurtState" type="Node" parent="StateMachine"]
 script = ExtResource("12_deaoy")
 animationName = Array[String](["hurt_1", "hurt_2"])
-metadata/_custom_type_script = "uid://ckni4s85e7nul"
 
 [node name="LightAttack" type="Node" parent="StateMachine"]
 
 [node name="LightAttack1State" type="Node" parent="StateMachine/LightAttack"]
 script = ExtResource("11_5snf0")
+controllerKey = "lightattack"
 comboName = "light"
-actionName = &"attack 1"
 animationName = Array[String](["right_punch"])
-metadata/_custom_type_script = "uid://dnuqscb2k1arl"
 
 [node name="LightAttack2State" type="Node" parent="StateMachine/LightAttack"]
 script = ExtResource("11_5snf0")
+controllerKey = "lightattack"
 comboName = "light"
-actionName = &"attack 1"
 animationName = Array[String](["left_punch"])
-metadata/_custom_type_script = "uid://dnuqscb2k1arl"
 
 [node name="LightAttack3State" type="Node" parent="StateMachine/LightAttack"]
 script = ExtResource("11_5snf0")
+controllerKey = "lightattack"
 comboName = "light"
-actionName = &"attack 1"
 animationName = Array[String](["head_but"])
-metadata/_custom_type_script = "uid://dnuqscb2k1arl"
 
 [node name="LightAttack4State" type="Node" parent="StateMachine/LightAttack"]
 script = ExtResource("11_5snf0")
+controllerKey = "lightattack"
 comboName = "light"
-actionName = &"attack 1"
 animationName = Array[String](["right_punch_2"])
-metadata/_custom_type_script = "uid://dnuqscb2k1arl"
 
 [node name="ComboManager" type="Node" parent="."]
 script = ExtResource("11_ffrrd")
 comboSettings = Array[ExtResource("12_5snf0")]([SubResource("Resource_tywue")])
-metadata/_custom_type_script = "uid://4860wyu75yor"
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("14_twwd3")
-metadata/_custom_type_script = "uid://dxolowo8wnp07"
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("healthComponent")]
 script = ExtResource("15_uigk4")
 healthComponent = NodePath("../HealthComponent")
-metadata/_custom_type_script = "uid://dul0n5x83yrhk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(1, -4)
@@ -401,7 +387,6 @@ position = Vector2(10, 0)
 script = ExtResource("16_deaoy")
 damage = 5
 xOffset = 10.0
-metadata/_custom_type_script = "uid://6vrp6qpwpndh"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(-2, -5)

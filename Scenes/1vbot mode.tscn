@@ -20,4 +20,4 @@ position = Vector2(139, 108)
 isPlayer = true
 
 [node name="Luffy" parent="." groups=["Enemy"] instance=ExtResource("3_cdxd5")]
-position = Vector2(276, 94)
+position = Vector2(221, 96)
