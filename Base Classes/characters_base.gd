@@ -45,7 +45,6 @@ func _ready() -> void:
 
 	if isPlayer:
 		collision_layer = 2
-		enemy = get_tree().get_first_node_in_group("Enemy")
 		hitbox.enemy = enemy
 		controller = PlayerController.new()
 		camera = Camera2D.new()
@@ -55,10 +54,11 @@ func _ready() -> void:
 		
 	else:
 		collision_layer = 3
-		enemy = get_tree().get_first_node_in_group("Player")
+		enemy = get_parent().player
 		hitbox.enemy = enemy
 		controller = AIController.new()
 		controller.player = enemy #Set the player of the controller to real player, i.e enemy of this 
+		print("Is enemy")
 	
 	controller.character = self
 

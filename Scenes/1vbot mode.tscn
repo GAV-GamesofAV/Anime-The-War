@@ -1,9 +1,7 @@
-[gd_scene load_steps=7 format=4 uid="uid://bngoymijsevjq"]
+[gd_scene load_steps=5 format=4 uid="uid://bngoymijsevjq"]
 
 [ext_resource type="Script" uid="uid://crvy6663fa2nl" path="res://Scripts/1_vbot_mode.gd" id="1_103yr"]
-[ext_resource type="PackedScene" uid="uid://b6rhp0n3qdyxd" path="res://Characters/Naruto/naruto.tscn" id="2_5o5oq"]
 [ext_resource type="Texture2D" uid="uid://cdxs4s4k053ix" path="res://Assets/Backgrounds/world_tileset.png" id="2_cdxd5"]
-[ext_resource type="PackedScene" uid="uid://thgpiubtb6jr" path="res://Characters/Luffy/luffy.tscn" id="3_cdxd5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wn6ko"]
 texture = ExtResource("2_cdxd5")
@@ -148,10 +146,3 @@ script = ExtResource("1_103yr")
 [node name="Floor" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAADAAkAAAAAAAAAAAAEAAkAAAAAAAAAAAAFAAkAAAAAAAAAAAAFAAoAAAAAAAAAAAAGAAoAAAAAAAAAAAAHAAoAAAAAAAAAAAAIAAsAAAAAAAAAAAAJAAoAAAAAAAAAAAAIAAoAAAAAAAAAAAAHAAkAAAAAAAAAAAAGAAkAAAAAAAAAAAAIAAkAAAAAAAAAAAAJAAkAAAAAAAAAAAAKAAkAAAAAAAAAAAALAAkAAAAAAAAAAAAMAAkAAAAAAAAAAAANAAkAAAAAAAAAAAAOAAkAAAAAAAAAAAAPAAkAAAAAAAAAAAAQAAkAAAAAAAAAAAARAAkAAAAAAAAAAAATAAkAAAAAAAAAAAAUAAkAAAAAAAAAAAAVAAkAAAAAAAAAAAAWAAkAAAAAAAAAAAAXAAkAAAAAAAAAAAASAAkAAAAAAAAAAAACAAkAAAAAAAAAAAABAAkAAAAAAAAAAAAAAAkAAAAAAAAAAAD//wkAAAAAAAAAAAD+/wkAAAAAAAAAAAD9/wkAAAAAAAAAAAD8/wkAAAAAAAAAAAD7/wkAAAAAAAAAAAD6/wkAAAAAAAAAAAD5/wkAAAAAAAAAAAD4/wkAAAAAAAAAAAD3/wkAAAAAAAAAAAD2/wkAAAAAAAAAAAD1/wkAAAAAAAAAAAD0/wkAAAAAAAAAAADz/wkAAAAAAAAAAADy/wkAAAAAAAAAAAAYAAkAAAAAAAAAAAAZAAkAAAAAAAAAAAAaAAkAAAAAAAAAAAAbAAkAAAAAAAAAAAAcAAkAAAAAAAAAAAAdAAkAAAAAAAAAAAAeAAkAAAAAAAAAAAAfAAkAAAAAAAAAAAAgAAkAAAAAAAAAAAAhAAkAAAAAAAAAAAAiAAkAAAAAAAAAAAAjAAkAAAAAAAAAAAAkAAkAAAAAAAAAAAAlAAkAAAAAAAAAAAAmAAkAAAAAAAAAAAAnAAkAAAAAAAAAAAAoAAkAAAAAAAAAAAApAAkAAAAAAAAAAAAqAAkAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_6ennh")
-
-[node name="Luffy" parent="." groups=["Player"] instance=ExtResource("3_cdxd5")]
-position = Vector2(332, 97)
-isPlayer = true
-
-[node name="Naruto" parent="." groups=["Enemy"] instance=ExtResource("2_5o5oq")]
-position = Vector2(27, 108)

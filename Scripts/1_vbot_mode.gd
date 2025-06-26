@@ -4,7 +4,17 @@ var player: Character
 var bot: Character
 
 func _ready() -> void:
-    player = get_tree().get_first_node_in_group("Player")
-    bot = get_tree().get_first_node_in_group("Enemy")
+    player = Global.playerScene.instantiate()
+    bot = Global.enemyScene.instantiate()
+
+    player.isPlayer = true
+    player.enemy = bot
+    bot.enemy = player
+    bot.isPlayer = false
+    add_child(player)
+    add_child(bot)
+    bot.position.x += 20 #Temp
+    
+
     Global.game_ready.emit()
     Global.gameReady = true

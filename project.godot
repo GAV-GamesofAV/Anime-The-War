@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="Anime The War"
-run/main_scene="uid://bngoymijsevjq"
+run/main_scene="uid://pki31avy8mxs"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Global="*res://Scripts/Global.gd"
+Data="*res://Scripts/Data.gd"
 
 [display]
 

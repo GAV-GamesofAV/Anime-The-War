@@ -1,4 +1,9 @@
-[gd_scene format=3 uid="uid://d21f07sshxanq"]
+[gd_scene load_steps=5 format=3 uid="uid://d21f07sshxanq"]
+
+[ext_resource type="Script" uid="uid://dk1v8n8lfy3m1" path="res://Scripts/character_selection.gd" id="1_mdkri"]
+[ext_resource type="Texture2D" uid="uid://cqlsdjr57tmik" path="res://Assets/Character Icons/Naruto Icon.png" id="2_3nbr6"]
+[ext_resource type="Script" uid="uid://dbk5dtnqo2c1c" path="res://Base Classes/Character_Selection_Button.gd" id="3_btth6"]
+[ext_resource type="Texture2D" uid="uid://b50il1obvg76h" path="res://Assets/Character Icons/Luffy Icon.png" id="4_ov5p2"]
 
 [node name="CharacterSelection" type="Control"]
 layout_mode = 3
@@ -7,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_mdkri")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 0
@@ -16,17 +22,24 @@ offset_right = 554.0
 offset_bottom = 265.0
 columns = 2
 
-[node name="Naruto" type="Button" parent="GridContainer"]
+[node name="Naruto" type="TextureButton" parent="GridContainer"]
 layout_mode = 2
-text = "Naruto"
+texture_normal = ExtResource("2_3nbr6")
+script = ExtResource("3_btth6")
+characterName = "Naruto"
+metadata/_custom_type_script = "uid://dbk5dtnqo2c1c"
 
-[node name="Luffy" type="Button" parent="GridContainer"]
+[node name="Luffy" type="TextureButton" parent="GridContainer"]
 layout_mode = 2
-text = "Luffy
-"
+texture_normal = ExtResource("4_ov5p2")
+script = ExtResource("3_btth6")
+characterName = "Luffy"
+metadata/_custom_type_script = "uid://dbk5dtnqo2c1c"
 
 [node name="ConfirmButton" type="Button" parent="."]
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 text = "Confirm"
+
+[connection signal="pressed" from="ConfirmButton" to="." method="_on_confirm_button_pressed"]
