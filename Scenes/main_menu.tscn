@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://pki31avy8mxs"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_right = 641.0
+offset_bottom = 23.0
+text = "Anime The War"
+horizontal_alignment = 1
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 263.0
+offset_top = 131.0
+offset_right = 346.0
+offset_bottom = 162.0
+text = "Play"

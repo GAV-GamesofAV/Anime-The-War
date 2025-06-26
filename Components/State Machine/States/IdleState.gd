@@ -5,6 +5,7 @@ func enter(_character):
 	super(_character)
 	character.play_animation(animationName[randi() % animationName.size()])
 
+
 #Previous code
 # func update(_delta):
 # 	if character.isPlayer:

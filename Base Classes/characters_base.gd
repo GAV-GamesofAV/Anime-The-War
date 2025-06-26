@@ -16,6 +16,7 @@ var characterBaseReady: bool = false
 @export var hurtbox: HurtBox
 @export var hitbox: HitBox
 
+var camera: Camera2D
 var controller: Controller
 var enemy: Character
 
@@ -44,21 +45,24 @@ func _ready() -> void:
 
 	if isPlayer:
 		collision_layer = 2
-	else:
-		collision_layer = 3
-
-	if isPlayer:
 		enemy = get_tree().get_first_node_in_group("Enemy")
 		hitbox.enemy = enemy
 		controller = PlayerController.new()
+		camera = Camera2D.new()
+		camera.position_smoothing_enabled = true
+		add_child(camera)
+
 		
 	else:
+		collision_layer = 3
 		enemy = get_tree().get_first_node_in_group("Player")
 		hitbox.enemy = enemy
 		controller = AIController.new()
 		controller.player = enemy #Set the player of the controller to real player, i.e enemy of this 
 	
 	controller.character = self
+
+	add_child(controller)
 
 	characterBaseReady = true
 	character_base_ready.emit()
@@ -73,7 +77,7 @@ func _physics_process(delta: float) -> void:
 		#Apply Gravity
 		if not is_on_floor():
 			velocity.y += Global.gravity * delta
-
+		
 		move_and_slide()
 
 func _process(delta: float) -> void:

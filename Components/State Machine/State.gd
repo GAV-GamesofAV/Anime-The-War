@@ -21,7 +21,7 @@ func enter(_character):
 func update(_delta):
     pass
 
-func physics_update(_delta):
+func physics_update(_delta: float):
     pass
 
 #Only this function will change states

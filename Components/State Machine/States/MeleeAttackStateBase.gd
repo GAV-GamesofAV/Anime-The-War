@@ -48,7 +48,7 @@ func handle_input(_inputData: Dictionary):
 	if _inputData[controllerKey]:
 		if character.comboManager.is_chaining_allowed(comboName):
 			character.change_state(characterComboStateNames[character.comboManager.get_stage(comboName)])
-			
+		
 	
 	if character.is_animation_finished() and character.is_on_floor():
 		character.change_state(character.idleStateName)

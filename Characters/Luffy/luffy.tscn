@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://thgpiubtb6jr"]
+[gd_scene load_steps=65 format=3 uid="uid://thgpiubtb6jr"]
 
 [ext_resource type="Script" uid="uid://cvfuxvkonim2f" path="res://Base Classes/characters_base.gd" id="1_ijj7t"]
 [ext_resource type="Texture2D" uid="uid://ci26gm3jjreom" path="res://Assets/characters/Luffy/Luffy Idle.png" id="2_hrijp"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://bdrc0s32clmrj" path="res://Components/State Machine/States/MeleeAttackStateBase.gd" id="11_w1514"]
 [ext_resource type="Script" uid="uid://e4w6n5svo4bm" path="res://Components/State Machine/States/RunState.gd" id="12_e2hre"]
 [ext_resource type="Script" uid="uid://b453m6g0i1jtp" path="res://Components/ComboManager/ComboManager.gd" id="15_4x3kj"]
+[ext_resource type="Script" uid="uid://7bm2mtmdmdpk" path="res://Components/ComboManager/ComboSettings.gd" id="17_ncima"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ncima"]
 atlas = ExtResource("2_mvi5u")
@@ -251,7 +252,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qltux")
 }],
-"loop": true,
+"loop": false,
 "name": &"jet_palm",
 "speed": 10.0
 }, {
@@ -315,7 +316,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xrd5i")
 }],
-"loop": true,
+"loop": false,
 "name": &"rifle",
 "speed": 10.0
 }, {
@@ -359,6 +360,13 @@ size = Vector2(38, 65)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mvi5u"]
 size = Vector2(40, 66)
 
+[sub_resource type="Resource" id="Resource_ncima"]
+script = ExtResource("17_ncima")
+comboName = "light"
+maxStages = 3
+timeout = 1.5
+metadata/_custom_type_script = "uid://7bm2mtmdmdpk"
+
 [node name="Luffy" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "stateMachine", "comboManager", "healthComponent", "hurtbox", "hitbox")]
 script = ExtResource("1_ijj7t")
 sprite = NodePath("AnimatedSprite2D")
@@ -373,7 +381,6 @@ lightAttackComboStatesNames = Array[String](["LightAttack1State", "LightAttack2S
 sprite_frames = SubResource("SpriteFrames_ncima")
 animation = &"jet_palm"
 autoplay = "idle"
-frame_progress = 0.765814
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -448,4 +455,5 @@ shape = SubResource("RectangleShape2D_mvi5u")
 
 [node name="ComboManager" type="Node" parent="."]
 script = ExtResource("15_4x3kj")
+comboSettings = Array[ExtResource("17_ncima")]([SubResource("Resource_ncima")])
 metadata/_custom_type_script = "uid://b453m6g0i1jtp"

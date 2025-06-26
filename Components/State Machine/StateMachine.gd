@@ -29,7 +29,7 @@ func change_state(newStateName: String):
 			character.hitbox.monitoring = true
 		else:
 			Global.set_gravity()
-			character.hitbox.monitoring = false
+			character.hitbox.set_deferred("monitoring", false)
 	
 	if character.characterBaseReady:
 		character.character_base_ready.emit() #Emit it to make the enter function work
