@@ -17,9 +17,5 @@ func _ready() -> void:
 
 func apply_damage(area: Area2D):
 	if area is HurtBox and area.get_parent() == enemy:
-		print("ENemy is enemy")
-		print(str(get_parent()) + " HitBox collided")
 		area.take_damage(damage)
 		set_deferred("monitoring", false)
-	else:
-		print("ENemy is not enemy")

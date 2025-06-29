@@ -9,3 +9,6 @@ func enter(_character):
 func update(_delta):
     if not character.enemy.stateMachine.currentState is MeleeAttackState:
         character.change_state(character.idleStateName)
+
+func handle_input(_inputData):
+    pass

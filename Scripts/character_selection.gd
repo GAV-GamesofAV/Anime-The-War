@@ -6,6 +6,9 @@ var playerSelected: bool = false #False is selecting true otherwise true
 var playerScene: String
 var enemyScene: String 
 
+var playerDisplay: Character
+var enemyDisplay: Character
+
 func _on_confirm_button_pressed() -> void:
     if not playerSelected:
         playerSelected = true

@@ -15,6 +15,8 @@ func _ready() -> void:
     add_child(bot)
     bot.position.x += 20 #Temp
     
+    player.map = get_node("Map1")
+    bot.map = get_node("Map1")
 
     Global.game_ready.emit()
     Global.gameReady = true

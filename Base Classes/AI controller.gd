@@ -1,6 +1,8 @@
 extends Controller
 class_name AIController
 
+var allow: bool = true #Cheat
+
 var isReady: bool = false
 
 enum AIStates{
@@ -39,8 +41,12 @@ func _ready() -> void:
 	lightAttackComboMaxStage = character.lightAttackComboStatesNames.size()
 	isReady = true
 
+#Cheat
+func toggle_allow():
+	allow = !allow
+
 func get_input():
-	if isReady:
+	if isReady and allow:
 		print("Running get_input of AI Controllre")
 		#Only if the bot is in idle, then it will decide
 		if aiState == AIStates.IDLE:
@@ -62,6 +68,14 @@ func get_input():
 			_:
 				pass
 
+	#Only for cheat
+	else:
+		direction = 0
+		jump = false
+		lightAttack = false
+	if Input.is_action_just_pressed("toggle ai"):
+		toggle_allow()
+
 	return{
 		moveKey: direction,
 		jumpKey: jump,
@@ -80,7 +94,7 @@ func _handle_idle():
 func _handle_chase():
 	direction = sign(player.position.x - character.position.x)
 
-	if abs(character.position.x - player.position.x) <= attackRange:
+	if abs(character.position.x - player.position.x) <= attackRange or character.position.x < character.map.minWorldLimit.x or character.position.x > character.map.maxWorldLimit.x:
 		aiState = AIStates.IDLE
 
 	#Reset the remaining actions
@@ -98,7 +112,7 @@ func _handle_run():
 
 	
 
-	if distanceRan >= runningDistance:
+	if distanceRan >= runningDistance or character.position.x < character.map.minWorldLimit.x or character.position.x > character.map.maxWorldLimit.x:
 		aiState = AIStates.IDLE
 		runningDistance = 0
 	

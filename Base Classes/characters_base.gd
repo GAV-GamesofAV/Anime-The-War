@@ -2,8 +2,11 @@ extends CharacterBody2D
 class_name Character
 
 signal character_base_ready
+signal died
 
 var characterBaseReady: bool = false
+
+var map: Map
 
 @export var isPlayer: bool
 @export var speed: int = 200
@@ -40,6 +43,7 @@ func _ready() -> void:
 	stateMachine.change_state(idleStateName)
 	
 	hurtbox.took_damage.connect(_on_hurtbox_damage)
+	healthComponent.died.connect(_health_component_died)
 
 	collision_mask = 1
 
@@ -78,6 +82,8 @@ func _physics_process(delta: float) -> void:
 		if not is_on_floor():
 			velocity.y += Global.gravity * delta
 		
+		position = position.clamp(map.minWorldLimit, map.maxWorldLimit)
+
 		move_and_slide()
 
 func _process(delta: float) -> void:
@@ -103,3 +109,6 @@ func jump():
 
 func _on_hurtbox_damage():
 	change_state(hurtStateName)
+
+func _health_component_died():
+	Global.call_deferred("game_over")

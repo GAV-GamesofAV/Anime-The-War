@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://b6rhp0n3qdyxd"]
+[gd_scene load_steps=55 format=3 uid="uid://b6rhp0n3qdyxd"]
 
 [ext_resource type="Script" uid="uid://c0708532e6ojc" path="res://Characters/Naruto/naruto.gd" id="1_ewq0f"]
 [ext_resource type="Texture2D" uid="uid://d1uv33h2h0u2f" path="res://Assets/characters/Naruto/Naruto-Idle.png" id="2_grh85"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://hoaeba16oskd" path="res://Components/HealthComponent.gd" id="14_twwd3"]
 [ext_resource type="Script" uid="uid://do7cdddyfs8b1" path="res://Components/HurtBox.gd" id="15_uigk4"]
 [ext_resource type="Script" uid="uid://b8ng301yyd7ll" path="res://Components/HitBox.gd" id="16_deaoy"]
+[ext_resource type="PackedScene" uid="uid://btc2cnxhfeya" path="res://Scenes/health_bar.tscn" id="19_nu668"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_grh85"]
 atlas = ExtResource("3_grh85")
@@ -310,7 +311,7 @@ hitbox = NodePath("HitBox")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1wp1r")
-animation = &"hurt1"
+animation = &"hurt2"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -338,7 +339,7 @@ animationName = Array[String](["run"])
 
 [node name="HurtState" type="Node" parent="StateMachine"]
 script = ExtResource("12_deaoy")
-animationName = Array[String](["hurt_1", "hurt_2"])
+animationName = Array[String](["hurt1", "hurt2"])
 
 [node name="LightAttack" type="Node" parent="StateMachine"]
 
@@ -372,6 +373,8 @@ comboSettings = Array[ExtResource("12_5snf0")]([SubResource("Resource_tywue")])
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("14_twwd3")
+maxHealth = 10
+health = 10
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("healthComponent")]
 script = ExtResource("15_uigk4")
@@ -392,3 +395,7 @@ xOffset = 10.0
 position = Vector2(-2, -5)
 shape = SubResource("RectangleShape2D_twwd3")
 debug_color = Color(1.44392e-06, 0.639391, 0.365327, 0.42)
+
+[node name="HealthBar" parent="." instance=ExtResource("19_nu668")]
+visible = false
+position = Vector2(0, -48)
